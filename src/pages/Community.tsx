@@ -18,20 +18,20 @@ export function Community() {
   useEffect(() => {
     const fetchTopics = async () => {
       const topicsData = await communityAPI.getTopics();
-      setTopics(topicsData);
+      updateTopics(() => topicsData);
     };
     fetchTopics();
-  }, [setTopics]);
+  }, [updateTopics]);
 
   useEffect(() => {
     if (selectedTopic) {
       const fetchComments = async () => {
         const commentsData = await communityAPI.getCommentsByTopic(selectedTopic.id);
-        setComments(commentsData);
+        updateComments(() => commentsData);
       };
       fetchComments();
     }
-  }, [selectedTopic, setComments]);
+  }, [selectedTopic, updateComments]);
 
   const handleSelectTopic = (topic: Topic) => {
     selectTopic(topic);
